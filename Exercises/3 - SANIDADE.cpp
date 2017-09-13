@@ -58,7 +58,8 @@ class List {
 int main() {
 	// User input
 	List l;
-	uint64_t cur, prev, next, pos;
+	string cur, prev, next;
+	int pos;
 	string line;
 	bool sane = 1;
 
