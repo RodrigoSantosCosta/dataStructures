@@ -77,19 +77,19 @@ int main() {
 				continue;
 
 			// Check if query is a prefix of word
-			auto ptr = n->s.begin();
-			auto ptr2 = begin(m->s);
+			string::iterator ptr = n->s.begin();
+			string::iterator ptr2 = m->s.begin();
+
 			for (int i = 0; i < tmp; ++i) {
-				if (ptr++ != ptr2++)
+				if ((*ptr++) != (*ptr2++)) {
 					isPrefix = 0;
 					break;
+				}
 			}
 
-			if (isPrefix)
+			if (isPrefix) {
 				++result;
-
-			/*if (m->s.substr(0, tmp) == n->s)
-				++result;*/
+			}
 		}
 
 		if (n != queries.head)
