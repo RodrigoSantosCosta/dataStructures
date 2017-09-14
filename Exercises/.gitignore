@@ -1,6 +1,5 @@
 *.out
-*callgrind.out.*
+*callgrind*
 *.dot
-*.png
 *.txt
 gprof2dot.py
