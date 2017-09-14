@@ -6,16 +6,15 @@ using namespace std;
 
 class Node {
 	public:
-		// Content
 		string s;
-
-		// Pointers
-		Node *_next;
+		Node *next;
 };
 
 class List {
 	public:
 		Node *head;
+		Node *tail;
+
 		unsigned int total;
 
 		// Constructor
@@ -23,20 +22,19 @@ class List {
 			total = 0;
 		}
 
+		// Add element at end of list
 		void add(string s) {
 			if (total) {
-				Node *n = this->head;
-				for (; n->_next; n = n->_next);
-
 				Node *m = new Node();
 				m->s = s;
-
-				n->_next = m;
+				this->tail->next = m;
+				this->tail = m;
 				++total;
 			} else {
 				Node *m = new Node();
 				m->s = s;
 				this->head = m;
+				this->tail = m;
 				++total;
 			}
 		}
@@ -44,7 +42,7 @@ class List {
 
 int main() {
 	// User input
-	int n, q, tmp, result;
+	int n, q, size, size2, result;
 	bool isPrefix;
 	scanf("%d %d ", &n, &q);
 
@@ -63,24 +61,27 @@ int main() {
 	}
 
 	// Iterate through each query
-	for (Node *n = queries.head; n; n = n->_next) {
+	Node *m;
+	for (Node *n = queries.head; n; n = n->next) {
 		result = 0;
 
 		// Iterate through all words
-		for (Node *m = words.head; m; m = m->_next) {
+		for (m = words.head; m; m = m->next) {
 			isPrefix = 1;
-			tmp = n->s.length();
+			size = n->s.length();
+			size2 = m->s.length();
 
 			// Query is bigger than word itself,
 			// can't possibly be a prefix
-			if (tmp > m->s.length())
+			if (size > size2)
 				continue;
 
 			// Check if query is a prefix of word
+			// by iterating through the characters
 			string::iterator ptr = n->s.begin();
 			string::iterator ptr2 = m->s.begin();
 
-			for (int i = 0; i < tmp; ++i) {
+			for (int i = 0; i < size; ++i) {
 				if ((*ptr++) != (*ptr2++)) {
 					isPrefix = 0;
 					break;
