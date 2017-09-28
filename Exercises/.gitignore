@@ -1,2 +1,5 @@
+*.out
+*callgrind*
+*.dot
 *.txt
-a.out
+gprof2dot.py
